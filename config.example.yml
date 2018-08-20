@@ -1,0 +1,22 @@
+# database
+database:
+  uri: user:user_password@(127.0.0.1:3306)/database_name?charset=utf8mb4&parseTime=True&loc=Local
+
+# global index settings
+index:
+  prefix: 'sns_'
+  shards: 1
+  replicas: 0
+
+tables:
+  # support glob expression
+  - '*'
+
+# overwrite table column settings
+rules:
+  - table: t1
+    columns:
+    - name: faaaa
+      type: text
+      analyzer: ik_max_word
+      searchAnalyzer: ik_max_word
