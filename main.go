@@ -21,8 +21,7 @@ var (
 
 	V = flag.Bool("version", false, "show version")
 	f = flag.String("c", "config.yml", "config file")
-	t = flag.Bool("t", false, "index use timestamp as version")
-
+	t = flag.Bool("t", false, "index use current as index suffix (version)")
 )
 
 func main() {
@@ -52,7 +51,7 @@ func main() {
 
 	suffix := ""
 	if *t  {
-		suffix = fmt.Sprintf("%d", time.Now().Unix())
+		suffix = fmt.Sprintf("%s", time.Now().Format("20061504"))
 	}
 
 	// read tables
