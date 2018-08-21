@@ -62,7 +62,6 @@ func main() {
 		logger.Fatal(err)
 	}
 
-
 	fmt.Println("// build via es-mysql-mapping-helper, version:", Build)
 	fmt.Println("// time: ", now)
 	fmt.Println("")
