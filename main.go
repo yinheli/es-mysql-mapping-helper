@@ -49,7 +49,7 @@ func main() {
 		logger.Fatal(err)
 	}
 
-	now := time.Now().Format("20061504")
+	now := time.Now().Format("200601021504")
 
 	suffix := ""
 	if *t {
@@ -62,7 +62,9 @@ func main() {
 		logger.Fatal(err)
 	}
 
-	fmt.Println("// ", now)
+
+	fmt.Println("// build via es-mysql-mapping-helper, version:", Build)
+	fmt.Println("// time: ", now)
 	fmt.Println("")
 
 	// read table columns
