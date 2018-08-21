@@ -22,8 +22,8 @@ fmt:
 .PHONY: install
 install:
 	go install \
-	-ldflags='-X "main.Build=$(GIT_TAG)-$(GIT_HASH)"' \
-	./cmd/$(CMD)
+	-ldflags='-s -w -X "main.Build=$(GIT_TAG)-$(GIT_HASH)"' \
+	.
 
 PHONY: $(CMD)
 $(CMD):
