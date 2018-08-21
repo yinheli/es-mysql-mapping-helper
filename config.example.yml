@@ -9,14 +9,18 @@ index:
   replicas: 0
 
 tables:
-  # support glob expression
-  - '*'
+# support glob expression
+- '*'
 
 # overwrite table column settings
 rules:
-  - table: t1
-    columns:
-    - name: faaaa
-      type: text
-      analyzer: ik_max_word
-      searchAnalyzer: ik_max_word
+- table: coupon
+  index: coupon_alias
+  shards: 1
+  replicas: 2
+  ikSearchableColumns: [brief]
+  columns:
+  - name: faaaa
+    type: text
+    analyzer: ik_max_word
+    searchAnalyzer: ik_max_word

@@ -29,7 +29,7 @@ type Rule struct {
 	Index             string           `yaml:"index"`
 	Shards            int              `yaml:"shards"`
 	Replicas          int              `yaml:"replicas"`
-	SearchableColumns []string         `yaml:"searchableColumns"`
+	SearchableColumns []string         `yaml:"ikSearchableColumns"`
 	Columns           []*ColumnSetting `yaml:"columns"`
 }
 
