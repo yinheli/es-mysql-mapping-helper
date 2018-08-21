@@ -63,7 +63,7 @@ func main() {
 	}
 
 	fmt.Println("// build via es-mysql-mapping-helper, version:", Build)
-	fmt.Println("// time: ", now)
+	fmt.Println("// time:", now)
 	fmt.Println("")
 
 	// read table columns
