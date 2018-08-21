@@ -3,14 +3,14 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
+	"flag"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gobwas/glob"
 	"log"
 	"os"
-	"strings"
-	"flag"
 	"runtime"
+	"strings"
 	"time"
 )
 
@@ -49,9 +49,11 @@ func main() {
 		logger.Fatal(err)
 	}
 
+	now := time.Now().Format("20061504")
+
 	suffix := ""
-	if *t  {
-		suffix = fmt.Sprintf("%s", time.Now().Format("20061504"))
+	if *t {
+		suffix = fmt.Sprintf("%s", now)
 	}
 
 	// read tables
@@ -59,6 +61,9 @@ func main() {
 	if err != nil {
 		logger.Fatal(err)
 	}
+
+	fmt.Println("// ", now)
+	fmt.Println("")
 
 	// read table columns
 	for _, table := range tables {
@@ -87,11 +92,11 @@ func main() {
 				index = rule.Index
 			}
 
-			if rule.Shards != config.Index.Shards {
+			if rule.Shards != 0 && rule.Shards != config.Index.Shards {
 				mappings.Settings.Index.NumberOfShards = rule.Shards
 			}
 
-			if rule.Replicas != config.Index.Replicas {
+			if rule.Replicas > config.Index.Replicas {
 				mappings.Settings.Index.NumberOfReplicas = rule.Replicas
 			}
 		}
@@ -156,7 +161,7 @@ func getRuleCol(rule *Rule, dbColumn *DbColumn) *Column {
 func mapType(dbType string) string {
 	switch dbType {
 	case "varchar", "char", "tinytext", "text", "mediumtext", "longtext", "enum", "set":
-		return "string"
+		return "text"
 	case "bigint":
 		return "long"
 	case "int", "tinyint", "smallint", "mediumint", "bit":
@@ -169,7 +174,7 @@ func mapType(dbType string) string {
 		return "binary"
 	}
 
-	return "string"
+	return "text"
 }
 
 func getRule(rules []*Rule, table string) *Rule {
